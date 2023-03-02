@@ -17,7 +17,7 @@ class Calculator:
         self.window = tk.Tk()
         self.window.geometry("375x667")
         self.window.resizable(0, 0)
-        self.window.title("Calculator")
+        self.window.title("Calculator made by Jy")
 
         self.total_expression = ""
         self.current_expression = ""
@@ -117,7 +117,7 @@ class Calculator:
     def create_clearone_button(self):
         button = tk.Button(self.buttons_frame, text="Del", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=10, command=self.clearone)
-        button.grid(row=0, column=9, sticky=tk.NSEW)
+        button.grid(row=0, column=5, sticky=tk.NSEW)
         
     def square(self):
         self.current_expression = str(eval(f"{self.current_expression}**2"))
