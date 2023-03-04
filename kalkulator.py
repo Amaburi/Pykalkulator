@@ -202,3 +202,6 @@ equals["command"] = sum1.calc_total
 equals.grid(row = 4, column = 5,columnspan=1,rowspan=2,padx=1, pady = 1)
 
 root.mainloop()
+
+
+

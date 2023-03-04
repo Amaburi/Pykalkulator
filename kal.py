@@ -1,3 +1,4 @@
+import math
 import tkinter as tk
 
 LARGE_FONT_STYLE = ("Arial", 40, "bold")
@@ -57,13 +58,17 @@ class Calculator:
         self.create_square_button()
         self.create_sqrt_button()
         self.create_clearone_button()
+        self.create_log_button()
+        self.create_sin_button()
+        self.create_cos_button()
+        self.create_tan_button()
 
     def create_display_labels(self):
-        total_label = tk.Label(self.display_frame, text=self.total_expression, anchor=tk.E, bg=WHITE,
+        total_label = tk.Label(self.display_frame, text=self.total_expression, anchor=tk.E, bg=LIGHT_GRAY,
                                fg=WHITE, padx=24, font=SMALL_FONT_STYLE)
         total_label.pack(expand=True, fill='both')
 
-        label = tk.Label(self.display_frame, text=self.current_expression, anchor=tk.E, bg=WHITE,
+        label = tk.Label(self.display_frame, text=self.current_expression, anchor=tk.E, bg=LIGHT_GRAY,
                          fg=WHITE, padx=24, font=LARGE_FONT_STYLE)
         label.pack(expand=True, fill='both')
 
@@ -81,7 +86,7 @@ class Calculator:
     def create_digit_buttons(self):
         for digit, grid_value in self.digits.items():
             button = tk.Button(self.buttons_frame, text=str(digit), bg=BROWN, fg=LABEL_COLOR, font=DIGITS_FONT_STYLE,
-                               borderwidth=10, command=lambda x=digit: self.add_to_expression(x))
+                               borderwidth=0, command=lambda x=digit: self.add_to_expression(x))
             button.grid(row=grid_value[0], column=grid_value[1], sticky=tk.NSEW)
 
     def append_operator(self, operator):
@@ -95,7 +100,7 @@ class Calculator:
         i = 0
         for operator, symbol in self.operations.items():
             button = tk.Button(self.buttons_frame, text=symbol, bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
-                               borderwidth=10, command=lambda x=operator: self.append_operator(x))
+                               borderwidth=0, command=lambda x=operator: self.append_operator(x))
             button.grid(row=i, column=4, sticky=tk.NSEW)
             i += 1
 
@@ -118,6 +123,7 @@ class Calculator:
         button = tk.Button(self.buttons_frame, text="Del", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=10, command=self.clearone)
         button.grid(row=0, column=5, sticky=tk.NSEW)
+    
         
     def square(self):
         self.current_expression = str(eval(f"{self.current_expression}**2"))
@@ -125,18 +131,72 @@ class Calculator:
 
     def create_square_button(self):
         button = tk.Button(self.buttons_frame, text="x\u00b2", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
-                           borderwidth=10, command=self.square)
+                           borderwidth=0, command=self.square)
         button.grid(row=0, column=2, sticky=tk.NSEW)
-
+    
     def sqrt(self):
         self.current_expression = str(eval(f"{self.current_expression}**0.5"))
         self.update_label()
 
     def create_sqrt_button(self):
         button = tk.Button(self.buttons_frame, text="\u221ax", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
-                           borderwidth=10, command=self.sqrt)
+                           borderwidth=0, command=self.sqrt)
         button.grid(row=0, column=3, sticky=tk.NSEW)
+        
+        
+    def create_log_button(self):
+        button = tk.Button(self.buttons_frame, text="log", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+                       borderwidth=0, command=self.logarithm)
+        button.grid(row=1, column=5, sticky=tk.NSEW)
 
+    def logarithm(self):
+        try:
+            self.current_expression = str(math.log10(float(self.current_expression)))
+        except ValueError:
+            self.current_expression = "Math Error"
+        self.update_label()
+        
+    def create_sin_button(self):
+        button = tk.Button(self.buttons_frame, text="sin", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+                       borderwidth=0, command=self.sine)
+        button.grid(row=2, column=5, sticky=tk.NSEW)
+
+    def sine(self):
+        try:
+            radians = math.radians(float(self.current_expression))
+            self.current_expression = str(round(math.sin(radians), 9))
+        except ValueError:
+            self.current_expression = "Math Error"
+        self.update_label()
+        
+    def create_cos_button(self):
+        button = tk.Button(self.buttons_frame, text="cos", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+                       borderwidth=0, command=self.cosine)
+        button.grid(row=3, column=5, sticky=tk.NSEW)
+
+    def cosine(self):
+        try:
+            radians = math.radians(float(self.current_expression))
+            self.current_expression = str(math.cos(radians))
+        except ValueError:
+            self.current_expression = "Math Error"
+        self.update_label()
+    
+    
+    def create_tan_button(self):
+        button = tk.Button(self.buttons_frame, text="tan", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
+                       borderwidth=0, command=self.tan)
+        button.grid(row=4, column=5, sticky=tk.NSEW)
+
+    def tan(self):
+        try:
+            radians = math.radians(float(self.current_expression))
+            self.current_expression = str(math.tan(radians))
+        except ValueError:
+            self.current_expression = "Math Error"
+        self.update_label()
+        
+        
     def evaluate(self):
         self.total_expression += self.current_expression
         self.update_total_label()
@@ -151,7 +211,7 @@ class Calculator:
 
     def create_equals_button(self):
         button = tk.Button(self.buttons_frame, text="=", bg=BROWN, fg=WHITE, font=DEFAULT_FONT_STYLE,
-                           borderwidth=10, command=self.evaluate)
+                           borderwidth=20, command=self.evaluate)
         button.grid(row=4, column=3, columnspan=2, sticky=tk.NSEW)
 
     def create_buttons_frame(self):
@@ -175,3 +235,4 @@ class Calculator:
 if __name__ == "__main__":
     calc = Calculator()
     calc.run()
+    
