@@ -86,7 +86,7 @@ class Calculator:
     def create_digit_buttons(self):
         for digit, grid_value in self.digits.items():
             button = tk.Button(self.buttons_frame, text=str(digit), bg=BROWN, fg=LABEL_COLOR, font=DIGITS_FONT_STYLE,
-                               borderwidth=0, command=lambda x=digit: self.add_to_expression(x))
+                               borderwidth=10, command=lambda x=digit: self.add_to_expression(x))
             button.grid(row=grid_value[0], column=grid_value[1], sticky=tk.NSEW)
 
     def append_operator(self, operator):
@@ -100,7 +100,7 @@ class Calculator:
         i = 0
         for operator, symbol in self.operations.items():
             button = tk.Button(self.buttons_frame, text=symbol, bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
-                               borderwidth=0, command=lambda x=operator: self.append_operator(x))
+                               borderwidth=10, command=lambda x=operator: self.append_operator(x))
             button.grid(row=i, column=4, sticky=tk.NSEW)
             i += 1
 
@@ -131,7 +131,7 @@ class Calculator:
 
     def create_square_button(self):
         button = tk.Button(self.buttons_frame, text="x\u00b2", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
-                           borderwidth=0, command=self.square)
+                           borderwidth=10, command=self.square)
         button.grid(row=0, column=2, sticky=tk.NSEW)
     
     def sqrt(self):
@@ -140,13 +140,13 @@ class Calculator:
 
     def create_sqrt_button(self):
         button = tk.Button(self.buttons_frame, text="\u221ax", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
-                           borderwidth=0, command=self.sqrt)
+                           borderwidth=10, command=self.sqrt)
         button.grid(row=0, column=3, sticky=tk.NSEW)
         
         
     def create_log_button(self):
         button = tk.Button(self.buttons_frame, text="log", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
-                       borderwidth=0, command=self.logarithm)
+                       borderwidth=10, command=self.logarithm)
         button.grid(row=1, column=5, sticky=tk.NSEW)
 
     def logarithm(self):
@@ -158,7 +158,7 @@ class Calculator:
         
     def create_sin_button(self):
         button = tk.Button(self.buttons_frame, text="sin", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
-                       borderwidth=0, command=self.sine)
+                       borderwidth=10, command=self.sine)
         button.grid(row=2, column=5, sticky=tk.NSEW)
 
     def sine(self):
@@ -171,7 +171,7 @@ class Calculator:
         
     def create_cos_button(self):
         button = tk.Button(self.buttons_frame, text="cos", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
-                       borderwidth=0, command=self.cosine)
+                       borderwidth=10, command=self.cosine)
         button.grid(row=3, column=5, sticky=tk.NSEW)
 
     def cosine(self):
@@ -185,7 +185,7 @@ class Calculator:
     
     def create_tan_button(self):
         button = tk.Button(self.buttons_frame, text="tan", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
-                       borderwidth=0, command=self.tan)
+                       borderwidth=10, command=self.tan)
         button.grid(row=4, column=5, sticky=tk.NSEW)
 
     def tan(self):
@@ -210,7 +210,7 @@ class Calculator:
             self.update_label()
 
     def create_equals_button(self):
-        button = tk.Button(self.buttons_frame, text="=", bg=BROWN, fg=WHITE, font=DEFAULT_FONT_STYLE,
+        button = tk.Button(self.buttons_frame, text="=", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=20, command=self.evaluate)
         button.grid(row=4, column=3, columnspan=2, sticky=tk.NSEW)
 
