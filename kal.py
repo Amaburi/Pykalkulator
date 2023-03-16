@@ -61,7 +61,7 @@ class Calculator:
         self.create_log_button()
         self.create_sin_button()
         self.create_cos_button()
-        self.create_tan_button()
+        
 
     def create_display_labels(self):
         total_label = tk.Label(self.display_frame, text=self.total_expression, anchor=tk.E, bg=LIGHT_GRAY,
@@ -75,7 +75,7 @@ class Calculator:
         return total_label, label
 
     def create_display_frame(self):
-        frame = tk.Frame(self.window, height=221, bg=LIGHT_GRAY)
+        frame = tk.Frame(self.window, height=221, bg=LIGHT_GRAY, borderwidth=0)
         frame.pack(expand=True, fill="both")
         return frame
 
@@ -212,7 +212,7 @@ class Calculator:
     def create_equals_button(self):
         button = tk.Button(self.buttons_frame, text="=", bg=BROWN, fg=LABEL_COLOR, font=DEFAULT_FONT_STYLE,
                            borderwidth=20, command=self.evaluate)
-        button.grid(row=4, column=3, columnspan=2, sticky=tk.NSEW)
+        button.grid(row=4, column=3, columnspan=5, sticky=tk.NSEW)
 
     def create_buttons_frame(self):
         frame = tk.Frame(self.window)
